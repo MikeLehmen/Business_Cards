@@ -1,1 +1,26 @@
-<p>login works!</p>
+<!-- <p>login works!</p> -->
+
+<h1 style="text-align:center">Login to Business Cards App</h1>
+  <div>
+      <form #loginForm="ngForm"
+        (ngSubmit)="onSubmit(loginForm.value)">
+    
+        <div class="form-group" style="width:20%;margin:auto">
+            <label for="userInput">Email</label>
+            <input class="form-control" type="text"
+                id="userInput"
+                placehoder="Email"
+                name="userName" ngModel>
+        </div>
+        <div class="form-group" style="width:20%;margin:auto">
+            <label for="pwInput">Password</label>
+            <input class="form-control" type="text"
+                id="pwInput"
+                placehoder="Password"
+                name="pw" ngModel>
+        </div>
+        <div style="width:5%;margin:auto;margin-top:10px">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+  </div>
