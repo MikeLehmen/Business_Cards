@@ -1,2 +1,12 @@
 <p>Welcome to the Dashboard stub!</p>
+
+<section>
+    <div>Test Data from Firestore:</div>
+    <ul>
+        <li *ngFor="let item of items | async">
+            First Name: {{item.f_name}}   Last Name: {{ item.l_name }}   Email: {{ item.email }}
+        </li>
+    </ul>
+</section>
+
 <button (click)="logout()">Log Out</button>
