@@ -22,9 +22,20 @@ export class DashboardComponent implements OnInit {
     this.items = this.itemsCollection.valueChanges(); 
   }
 
-  logout() {
+  logout(): void {
     this.afAuth.auth.signOut();
     this.router.navigate(['login']);
+  }
+
+  // takes whole form so it can reset it
+  stubPush(form: any): void {
+    this.itemsCollection.add({ 
+      f_name: form.value.f_name,
+      l_name: form.value.l_name,
+      email: form.value.email
+    });
+
+    form.reset();   // clear fields
   }
 
 }
