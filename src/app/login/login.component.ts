@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   // also try this just using a promise, might be cleaner
   // this observable emits more than I'd like, promise would fix
   authObservable: Observable<any>;
-  authObserver: any;          
+  authObserver: any; 
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { 
     this.authObservable = afAuth.user;
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
+    this.authObserver.unsubscribe();
   }
 
 }

@@ -15,13 +15,17 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { NewBusinessCardComponent } from './new-business-card/new-business-card.component';
+import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
 //import { AngularFireDatabase } from '@angular/fire/database';   // for real-time database (not using)
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    NewBusinessCardComponent,
+    SearchBusinessCardsComponent
   ],
   imports: [
     BrowserModule,

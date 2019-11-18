@@ -1,0 +1,8 @@
+<section>
+    <div>Test Data from Firestore:</div>
+    <ul>
+        <li *ngFor="let item of items | async">
+            Name: {{item.f_name}} {{ item.l_name }} --- Email: {{ item.email }}
+        </li>
+    </ul>
+</section>
