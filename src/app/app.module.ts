@@ -15,9 +15,16 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
+// webcam
+import { WebcamModule } from './webcam/webcam.module';
+
+// http
+import { HttpClientModule } from '@angular/common/http';
+
 import { NewBusinessCardComponent } from './new-business-card/new-business-card.component';
 import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
-//import { AngularFireDatabase } from '@angular/fire/database';   // for real-time database (not using)
+
 
 @NgModule({
   declarations: [
@@ -31,11 +38,12 @@ import { SearchBusinessCardsComponent } from './search-business-cards/search-bus
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    WebcamModule,
+    HttpClientModule
   ],
   providers: [
     LoginGuard
