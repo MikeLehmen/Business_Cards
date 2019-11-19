@@ -39,10 +39,10 @@ export class NewBusinessCardComponent implements OnInit {
     this.itemsCollection = this.afs.collection('test');
 
     // webcam init
-    WebcamUtil.getAvailableVideoInputs()
-    .then((mediaDevices: MediaDeviceInfo[]) => {
-      this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-    });
+    // WebcamUtil.getAvailableVideoInputs()
+    // .then((mediaDevices: MediaDeviceInfo[]) => {
+    //   this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
+    // });
   }
 
   public sendToGoogle()
@@ -129,12 +129,12 @@ export class NewBusinessCardComponent implements OnInit {
     return this.trigger.asObservable();
   }
 
-  // dont need this
+  // // dont need this
   public get nextWebcamObservable(): Observable<boolean|string> {
     return this.nextWebcam.asObservable();
   }
 
-  // dont need this
+  // // dont need this
   public get videoOptions(): MediaTrackConstraints {
     const result: MediaTrackConstraints = {};
     if (this.facingMode && this.facingMode !== "") {

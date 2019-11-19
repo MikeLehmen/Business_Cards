@@ -1,6 +1,6 @@
 <!-- camera -->
 <div style="text-align:center" *ngIf="!webcamImage">
-
+    <h2>Snap your new card!</h2>
     <div>
       <webcam [height]="400" [width]="400" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
               [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
@@ -9,24 +9,13 @@
               (cameraSwitched)="cameraWasSwitched($event)"
               (initError)="handleInitError($event)"></webcam>
       <br/>
-      <button class="btn btn-success" (click)="triggerSnapshot();">Snap!</button>
-      <!-- <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
-      <br/>
-      <button class="actionBtn" (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
-      <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label for="cameraSwitchCheckbox">Allow Camera Switch</label>
-      <br/>
-      DeviceId: <input id="deviceId" type="text" [(ngModel)]="deviceId" style="width: 500px">
-      <button (click)="showNextWebcam(deviceId);">Activate</button>
-      <br/>
-      Preferred facing mode:
-      <input type="radio" value="user" name="facingMode" [(ngModel)]="facingMode"> User
-      <input type="radio" value="environment" name="facingMode" [(ngModel)]="facingMode"> Environment
-      <input type="radio" value="" name="facingMode" [(ngModel)]="facingMode"> No preference -->
+      <button class="btn btn-success'" (click)="triggerSnapshot();">Snap!</button>
     </div>
   </div>
   
-  <div *ngIf="webcamImage">
-    <img [src]="webcamImage.imageAsDataUrl" width="200" height="150"/>
+  <div style="text-align: center;" *ngIf="webcamImage">
+    <h2>Does this look right?</h2>
+    <img class="image-border" [src]="webcamImage.imageAsDataUrl" width="300" height="225"/>
   </div>
   
   <h4 *ngIf="errors.length > 0">Messages:</h4>
