@@ -111,8 +111,12 @@ export class NewBusinessCardComponent implements OnInit {
     console.log('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
 
-    console.log("SENDING TO GOOGLE...");
-    this.sendToGoogle();
+    //console.log("SENDING TO GOOGLE...");
+    //this.sendToGoogle();
+  }
+
+  public discardImage(): void {
+    this.webcamImage = null;
   }
 
   // dont need this

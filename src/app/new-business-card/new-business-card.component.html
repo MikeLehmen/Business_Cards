@@ -1,19 +1,16 @@
 <!-- camera -->
-<div style="text-align:center">
-    <h1>
-      Ngx-Webcam Demo
-    </h1>
-  
+<div style="text-align:center" *ngIf="!webcamImage">
+
     <div>
-      <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
+      <webcam [height]="400" [width]="400" [trigger]="triggerObservable" (imageCapture)="handleImage($event)" *ngIf="showWebcam"
               [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
               [videoOptions]="videoOptions"
               [imageQuality]="1"
               (cameraSwitched)="cameraWasSwitched($event)"
               (initError)="handleInitError($event)"></webcam>
       <br/>
-      <button class="actionBtn" (click)="triggerSnapshot();">Take A Snapshot</button>
-      <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
+      <button class="btn btn-success" (click)="triggerSnapshot();">Snap!</button>
+      <!-- <button class="actionBtn" (click)="toggleWebcam();">Toggle Webcam</button>
       <br/>
       <button class="actionBtn" (click)="showNextWebcam(true);" [disabled]="!multipleWebcamsAvailable">Next Webcam</button>
       <input id="cameraSwitchCheckbox" type="checkbox" [(ngModel)]="allowCameraSwitch"><label for="cameraSwitchCheckbox">Allow Camera Switch</label>
@@ -24,29 +21,21 @@
       Preferred facing mode:
       <input type="radio" value="user" name="facingMode" [(ngModel)]="facingMode"> User
       <input type="radio" value="environment" name="facingMode" [(ngModel)]="facingMode"> Environment
-      <input type="radio" value="" name="facingMode" [(ngModel)]="facingMode"> No preference
+      <input type="radio" value="" name="facingMode" [(ngModel)]="facingMode"> No preference -->
     </div>
   </div>
   
-  <div class="snapshot" *ngIf="webcamImage">
-    <h2>Nice one!</h2>
-    <img [src]="webcamImage.imageAsDataUrl"/>
+  <div *ngIf="webcamImage">
+    <img [src]="webcamImage.imageAsDataUrl" width="200" height="150"/>
   </div>
   
   <h4 *ngIf="errors.length > 0">Messages:</h4>
   <ul *ngFor="let error of errors">
     <li>{{error | json}}</li>
   </ul>
-  
-  <h2>Like this project on GitHub:</h2>
-  <ul class="links">
-    <li>
-      <h2><a target="_blank" rel="noopener" href="https://github.com/basst314/ngx-webcam">Ngx-Webcam / GitHub</a></h2>
-    </li>
-  </ul>
 
 <!-- form -->
-<section style="margin-top: 20px;">
+<section style="margin-top: 20px;" *ngIf="webcamImage">
     <h1>Push some data (don't get clever, it doesn't validate fields)</h1>
     <div>
         <form #pushForm="ngForm"
@@ -78,6 +67,7 @@
 
             <div>
                 <button type="submit" class="btn btn-success">Submit</button>
+                <button type="button" (click)="discardImage()" class="btn btn-danger">Retake</button>
             </div>
         
         </form>
