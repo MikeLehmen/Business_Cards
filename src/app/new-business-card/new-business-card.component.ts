@@ -8,6 +8,7 @@ import { WebcamInitError } from '../webcam/domain/webcam-init-error';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+import { IBusinessCardTest } from '../business-card/model/business-card.model';
 
 @Component({
   selector: 'app-new-business-card',
@@ -36,7 +37,7 @@ export class NewBusinessCardComponent implements OnInit {
 
   ngOnInit() {
     // firebase data
-    this.itemsCollection = this.afs.collection('test');
+    this.itemsCollection = this.afs.collection('cards-proto');
 
     // webcam init
     // WebcamUtil.getAvailableVideoInputs()
@@ -44,6 +45,8 @@ export class NewBusinessCardComponent implements OnInit {
     //   this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
     // });
   }
+
+
 
   public sendToGoogle()
   {
@@ -75,13 +78,16 @@ export class NewBusinessCardComponent implements OnInit {
 
   // takes whole form so it can reset it
   pushData(form: any): void {
-    this.itemsCollection.add({
+    const cardToPush: IBusinessCardTest = {
       f_name: form.value.f_name,
       l_name: form.value.l_name,
-      email: form.value.email
-    });
+      email: form.value.email,
+      image: this.webcamImage.imageAsDataUrl
+    }
 
-    form.reset(); // clear fields
+    this.itemsCollection.add(cardToPush);
+
+    form.reset(); // clear fields (do this in a promise)
   }
 
   public triggerSnapshot(): void {

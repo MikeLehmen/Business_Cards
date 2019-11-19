@@ -5,4 +5,8 @@
             Name: {{item.f_name}} {{ item.l_name }} --- Email: {{ item.email }}
         </li>
     </ul>
+
+    <div>
+        <app-business-card *ngFor="let item of items | async" [data]="item"></app-business-card>
+    </div>
 </section>

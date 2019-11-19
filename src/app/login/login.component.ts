@@ -14,13 +14,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   // also try this just using a promise, might be cleaner
   // this observable emits more than I'd like, promise would fix
   authObservable: Observable<any>;
-  authObserver: any; 
+  //authObserver: any; 
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { 
     this.authObservable = afAuth.user;
-    this.authObserver = this.authObservable.subscribe(function() {
-                                              router.navigate(['dashboard']);
-                                            });
+    // this.authObserver = this.authObservable.subscribe(function() {
+    //                                           router.navigate(['dashboard']);
+    //                                         });
+    
   }
 
   onSubmit(form: any) {
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   login(user: string, pass: string) {
-    this.afAuth.auth.signInWithEmailAndPassword(user, pass)
+    this.afAuth.auth.signInWithEmailAndPassword(user, pass).then(() => this.router.navigate(['dashboard']))
       .catch( function(error) {
         console.log(error);
       })
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.authObserver.unsubscribe();
+    //this.authObserver.unsubscribe();
   }
 
 }

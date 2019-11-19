@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NewBusinessCardComponent } from './new-business-card/new-business-card.component';
 import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
+import { BusinessCardComponent } from './business-card/business-card.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { SearchBusinessCardsComponent } from './search-business-cards/search-bus
     DashboardComponent,
     LoginComponent,
     NewBusinessCardComponent,
-    SearchBusinessCardsComponent
+    SearchBusinessCardsComponent,
+    BusinessCardComponent
   ],
   imports: [
     BrowserModule,
