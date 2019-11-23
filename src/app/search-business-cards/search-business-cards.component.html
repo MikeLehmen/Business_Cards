@@ -1,12 +1,8 @@
 <section>
-    <div>Test Data from Firestore:</div>
-    <ul>
-        <li *ngFor="let item of items | async">
-            Name: {{item.f_name}} {{ item.l_name }} --- Email: {{ item.email }}
-        </li>
-    </ul>
-
     <div>
-        <app-business-card *ngFor="let item of items | async" [data]="item"></app-business-card>
+        <h2>Here Are Your Cards!</h2>
+    </div>
+    <div>
+        <app-business-card *ngFor="let item of itemsRef | async" [data]="item"></app-business-card>
     </div>
 </section>

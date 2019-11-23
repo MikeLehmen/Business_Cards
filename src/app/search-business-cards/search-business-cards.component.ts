@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { IBusinessCardTest } from '../business-card/model/business-card.model';
+import { IBusinessCardTestID } from '../business-card/model/business-card.model';
+import { BusinessCardService } from '../business-card/service/business-cards.service';
 
 @Component({
   selector: 'app-search-business-cards',
@@ -10,14 +11,14 @@ import { IBusinessCardTest } from '../business-card/model/business-card.model';
   styleUrls: ['./search-business-cards.component.css']
 })
 export class SearchBusinessCardsComponent implements OnInit {
-  private itemsCollection: AngularFirestoreCollection<IBusinessCardTest>;
-  private items: Observable<IBusinessCardTest[]>;
 
-  constructor(private afs: AngularFirestore) { }
+
+  private itemsRef: Observable<IBusinessCardTestID[]>;
+
+  constructor(private afs: AngularFirestore, private cardService: BusinessCardService) { }
 
   ngOnInit() {
-    this.itemsCollection = this.afs.collection('cards-proto');
-    this.items = this.itemsCollection.valueChanges();
+    this.itemsRef = this.cardService.getItemRef();
   }
 
 

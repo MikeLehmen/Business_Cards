@@ -25,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NewBusinessCardComponent } from './new-business-card/new-business-card.component';
 import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
 import { BusinessCardComponent } from './business-card/business-card.component';
+import { BusinessCardService } from './business-card/service/business-cards.service';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { BusinessCardComponent } from './business-card/business-card.component';
     HttpClientModule
   ],
   providers: [
-    LoginGuard
+    LoginGuard,
+    BusinessCardService
   ],
   bootstrap: [AppComponent]
 })

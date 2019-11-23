@@ -88,6 +88,8 @@ export class NewBusinessCardComponent implements OnInit {
     this.itemsCollection.add(cardToPush);
 
     form.reset(); // clear fields (do this in a promise)
+
+    this.webcamImage = null;
   }
 
   public triggerSnapshot(): void {

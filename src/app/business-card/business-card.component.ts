@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBusinessCardTest } from './model/business-card.model';
+import { IBusinessCardTestID } from './model/business-card.model';
+import { BusinessCardService } from './service/business-cards.service';
 
 @Component({
   selector: 'app-business-card',
@@ -7,14 +8,18 @@ import { IBusinessCardTest } from './model/business-card.model';
   styleUrls: ['./business-card.component.css']
 })
 export class BusinessCardComponent implements OnInit {
-  @Input() data: IBusinessCardTest;
+  @Input() data: IBusinessCardTestID;
 
-  constructor() {
+  constructor(private cards: BusinessCardService) {
 
    }
 
   ngOnInit() {
     
+  }
+
+  delete(): void {
+    this.cards.delete(this.data);
   }
 
 }

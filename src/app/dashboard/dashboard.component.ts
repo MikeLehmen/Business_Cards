@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { BusinessCardService } from '../business-card/service/business-cards.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private afAuth: AngularFireAuth, private router: Router) {
-
+  constructor(private afAuth: AngularFireAuth, private router: Router, private cardsService: BusinessCardService) {
+    
   }
 
   ngOnInit() {

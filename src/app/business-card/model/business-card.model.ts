@@ -24,3 +24,7 @@ export interface IBusinessCardTest {
     email: string;
     image: string;
 }
+
+export interface IBusinessCardTestID extends IBusinessCardTest {
+    id: string;
+}
