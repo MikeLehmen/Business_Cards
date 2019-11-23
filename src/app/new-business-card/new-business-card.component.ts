@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 
-import { IBusinessCardTest } from '../business-card/model/business-card.model';
+import { IBusinessCardTest, IBusinessCardTestID } from '../business-card/model/business-card.model';
+import { BusinessCardService } from '../business-card/service/business-cards.service';
 
 @Component({
   selector: 'app-new-business-card',
@@ -31,13 +32,10 @@ export class NewBusinessCardComponent implements OnInit {
   // switch to next / previous / specific webcam; true/false: forward/backwards, string: deviceId
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
-  // ---- firebase ----
-  private itemsCollection: AngularFirestoreCollection<any>;
-
   // ---- data model ----
   private formData: IBusinessCardTest;
 
-  constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router) {
+  constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router, private cards : BusinessCardService) {
     this.formData = {
       f_name : '',
       l_name: '',
@@ -49,17 +47,8 @@ export class NewBusinessCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    // firebase data
-    this.itemsCollection = this.afs.collection('cards-proto');
 
-    // webcam init
-    // WebcamUtil.getAvailableVideoInputs()
-    // .then((mediaDevices: MediaDeviceInfo[]) => {
-    //   this.multipleWebcamsAvailable = mediaDevices && mediaDevices.length > 1;
-    // });
   }
-
-
 
   public sendToGoogle()
   {
@@ -88,6 +77,7 @@ export class NewBusinessCardComponent implements OnInit {
       console.log(results);
       
       const resultText = results.responses[0].textAnnotations.map(e => { return e.description; });
+
       resultText.shift();
       console.log(resultText);
 
@@ -125,8 +115,9 @@ export class NewBusinessCardComponent implements OnInit {
     });
   }
 
-  // takes whole form so it can reset it
   pushData(form: any): void {
+
+    // set up data obj
     const cardToPush: IBusinessCardTest = {
       f_name: form.value.f_name,
       l_name: form.value.l_name,
@@ -136,13 +127,13 @@ export class NewBusinessCardComponent implements OnInit {
       image: this.webcamImage.imageAsDataUrl
     }
 
-    this.itemsCollection.add(cardToPush).then( () => {
+    // push to db
+    this.cards.create(cardToPush).then( () => {
       this.router.navigate(['dashboard/search']);
     }).catch( (error) => {
       console.log(error);
     });
 
-    //form.reset(); // clear fields (do this in a promise)
   }
 
   public triggerSnapshot(): void {
