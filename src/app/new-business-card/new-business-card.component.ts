@@ -34,7 +34,19 @@ export class NewBusinessCardComponent implements OnInit {
   // ---- firebase ----
   private itemsCollection: AngularFirestoreCollection<any>;
 
-  constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router) { }
+  // ---- data model ----
+  private formData: IBusinessCardTest;
+
+  constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router) {
+    this.formData = {
+      f_name : '',
+      l_name: '',
+      email: '',
+      phone_number : '',
+      misc_text: '', 
+      image: ''
+    }
+   }
 
   ngOnInit() {
     // firebase data
@@ -71,9 +83,45 @@ export class NewBusinessCardComponent implements OnInit {
 
     console.log(request);
 
+    // have to unsub from this
     this.http.post(googleVisionURL, request).subscribe( (results: any) => {
-      console.log("IN FROM GOOGLE");
       console.log(results);
+      
+      const resultText = results.responses[0].textAnnotations.map(e => { return e.description; });
+      resultText.shift();
+      console.log(resultText);
+
+      this.processResults(resultText);
+
+    });
+
+  }
+
+  processResults(tokens: string[]) : void {
+    // assume name is first two elements for now
+    this.formData.f_name = tokens.shift();
+    this.formData.l_name = tokens.shift();
+
+    const areaCodeRegex = /.[0-9]./;
+    const phoneRegex = /[0-9]{3}\-[0-9]{4}/;
+    const emailRegex = /.+\@.+(.com|.org|.gov|.biz)/;
+
+    tokens.forEach( (element) => {
+
+      if (areaCodeRegex.exec(element) != null || phoneRegex.exec(element) != null) {
+        console.log('phone num hit!');
+        this.formData.phone_number += element + ' ';
+      }
+
+      else if (emailRegex.exec(element) != null) {
+        console.log('email hit!');
+        this.formData.email += element;
+      } 
+
+      else {
+        this.formData.misc_text += element + ' ';
+      }
+
     });
   }
 
@@ -94,10 +142,7 @@ export class NewBusinessCardComponent implements OnInit {
       console.log(error);
     });
 
-    form.reset(); // clear fields (do this in a promise)
-
-    //this.webcamImage = null;
-    //this.router.navigate(['dashboard/search']);
+    //form.reset(); // clear fields (do this in a promise)
   }
 
   public triggerSnapshot(): void {
@@ -127,12 +172,21 @@ export class NewBusinessCardComponent implements OnInit {
     console.log('received webcam image', webcamImage);
     this.webcamImage = webcamImage;
 
-    //console.log("SENDING TO GOOGLE...");
-    //this.sendToGoogle();
+    this.sendToGoogle();
   }
 
   public discardImage(): void {
     this.webcamImage = null;
+    this.clearFormModel();
+  }
+
+  private clearFormModel() : void {
+    this.formData.f_name = '';
+    this.formData.l_name = '';
+    this.formData.email = '';
+    this.formData.phone_number = '';
+    this.formData.misc_text= '';
+    this.formData. image = '';
   }
 
   // dont need this
