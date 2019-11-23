@@ -33,4 +33,15 @@ export class BusinessCardService {
     delete(card: IBusinessCardTestID) : void {
         this.itemsCollection.doc(card.id).delete();
     }
+
+    update(card: IBusinessCardTestID) : void {
+        const data : IBusinessCardTest = {
+            f_name: card.f_name,
+            l_name: card.l_name,
+            email: card.email,
+            image: card.image
+        };
+
+        this.itemsCollection.doc(card.id).update(data);
+    }
 }

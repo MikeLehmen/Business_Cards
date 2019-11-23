@@ -9,9 +9,10 @@ import { BusinessCardService } from './service/business-cards.service';
 })
 export class BusinessCardComponent implements OnInit {
   @Input() data: IBusinessCardTestID;
+  update: boolean;
 
   constructor(private cards: BusinessCardService) {
-
+    this.update = false;
    }
 
   ngOnInit() {
@@ -20,6 +21,16 @@ export class BusinessCardComponent implements OnInit {
 
   delete(): void {
     this.cards.delete(this.data);
+  }
+
+  updateCard() {
+    this.cards.update(this.data);
+    
+    this.swapView();
+  }
+
+  swapView(): void {
+    this.update = !this.update;
   }
 
 }
