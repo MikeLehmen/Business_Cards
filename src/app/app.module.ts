@@ -26,6 +26,7 @@ import { NewBusinessCardComponent } from './new-business-card/new-business-card.
 import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
 import { BusinessCardComponent } from './business-card/business-card.component';
 import { BusinessCardService } from './business-card/service/business-cards.service';
+import { BusinessCardListComponent } from './business-card-list/business-card-list.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { BusinessCardService } from './business-card/service/business-cards.serv
     LoginComponent,
     NewBusinessCardComponent,
     SearchBusinessCardsComponent,
-    BusinessCardComponent
+    BusinessCardComponent,
+    BusinessCardListComponent
   ],
   imports: [
     BrowserModule,
