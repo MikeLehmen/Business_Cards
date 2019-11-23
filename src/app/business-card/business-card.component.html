@@ -35,6 +35,22 @@
                    id="emailInput"
                    name="email" [(ngModel)]="data.email">
         </div>
+
+        <div>
+            <label for="phoneInput">Phone Number:</label>
+            <input type="text"
+                   id="phoneInput"
+                   name="phone_number" [(ngModel)]="data.phone_number">
+        </div>
+
+        <div>
+            <label for="miscInput">Addition Info:</label>
+            <input type="text"
+                   id="miscInput"
+                   name="misc_text" [(ngModel)]="data.misc_text">
+        </div>
+
+
         <img [src]="data.image" width="100" height="75">
         <div>
             <button type="submit" class="btn btn-success">Update</button>

@@ -7,6 +7,7 @@ import { WebcamUtil } from '../webcam/util/webcam.util';
 import { WebcamInitError } from '../webcam/domain/webcam-init-error';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 import { IBusinessCardTest } from '../business-card/model/business-card.model';
 
@@ -33,7 +34,7 @@ export class NewBusinessCardComponent implements OnInit {
   // ---- firebase ----
   private itemsCollection: AngularFirestoreCollection<any>;
 
-  constructor(private afs: AngularFirestore, private http: HttpClient) { }
+  constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     // firebase data
@@ -82,14 +83,21 @@ export class NewBusinessCardComponent implements OnInit {
       f_name: form.value.f_name,
       l_name: form.value.l_name,
       email: form.value.email,
+      phone_number: form.value.phone_number,
+      misc_text: form.value.misc_text,
       image: this.webcamImage.imageAsDataUrl
     }
 
-    this.itemsCollection.add(cardToPush);
+    this.itemsCollection.add(cardToPush).then( () => {
+      this.router.navigate(['dashboard/search']);
+    }).catch( (error) => {
+      console.log(error);
+    });
 
     form.reset(); // clear fields (do this in a promise)
 
-    this.webcamImage = null;
+    //this.webcamImage = null;
+    //this.router.navigate(['dashboard/search']);
   }
 
   public triggerSnapshot(): void {

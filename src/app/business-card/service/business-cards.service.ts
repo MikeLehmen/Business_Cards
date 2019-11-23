@@ -39,6 +39,8 @@ export class BusinessCardService {
             f_name: card.f_name,
             l_name: card.l_name,
             email: card.email,
+            phone_number: card.phone_number,
+            misc_text: card.misc_text,
             image: card.image
         };
 

@@ -26,7 +26,7 @@ export class BusinessCardComponent implements OnInit {
   updateCard() {
     this.cards.update(this.data);
     
-    this.swapView();
+    //this.swapView();
   }
 
   swapView(): void {
