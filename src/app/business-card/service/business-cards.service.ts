@@ -10,8 +10,6 @@ export class BusinessCardService {
     private itemsCollection: AngularFirestoreCollection<IBusinessCardTest>;
     private itemsMeta: Observable<IBusinessCardTestID[]>;
 
-    //private items: Observable<IBusinessCardTest[]>;
-
     private authObserver: any;
 
     constructor(private afs : AngularFirestore, afAuth: AngularFireAuth) {
@@ -72,5 +70,10 @@ export class BusinessCardService {
         };
 
         this.itemsCollection.doc(card.id).update(data);
+    }
+
+    search(searchBy: string, searchTerm: string) {
+        var result = this.itemsCollection.ref.where(searchBy, '==', searchTerm);
+        return result;
     }
 }

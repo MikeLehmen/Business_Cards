@@ -1,5 +1,45 @@
 <section>
-    <section>
+    <!-- card display -->
+    <div style="display: inline-block;">
         <app-business-card-list></app-business-card-list>
+    </div>
+    <div style="display: inline-block;">
+        <!-- <p>Search Stub</p> -->
+        <h3>Search Your Cards!</h3>
+        <form #searchForm="ngForm"
+            (ngSubmit)="search(searchForm)">
+            
+            <div class="form-group">
+                <label for="searchTerm">Search</label>
+                <input class="form-control" type="text"
+                    id="searchTerm"
+                    placeholder="First Name"
+                    name="searchTerm" ngModel>
+            </div>
+
+            <div>
+                <input type="radio" value="f_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                <span>First Name</span>
+                <input type="radio" value="l_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                <span>Last Name</span>
+                <input type="radio" value="email" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                <span>Email</span>
+                <input type="radio" value="phone_number" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                <span>Phone Number</span>
+                <input type="radio" value="misc_text" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                <span>Other</span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <section *ngIf="!searchHit" style="display: inline-block;">
+        <p>Sorry, we couldn't find anything matching that!</p>
+    </section>
+    <section *ngIf="searchHit" style="display: inline-block;">
+        <app-business-card *ngFor="let card of foundCards" [data]="card"></app-business-card>
     </section>
 </section>
