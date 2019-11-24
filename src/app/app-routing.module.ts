@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginGuard } from './login/login.guard';
 import { NewBusinessCardComponent } from './new-business-card/new-business-card.component';
 import { SearchBusinessCardsComponent } from './search-business-cards/search-business-cards.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const dashboardChildRoutes: Routes = [
   { path: 'new', component: NewBusinessCardComponent },
@@ -19,8 +20,9 @@ const routes: Routes = [
     canActivate: [LoginGuard],
     children: dashboardChildRoutes
   },
-  { path: '', redirectTo: 'login', pathMatch: 'full'}
+  { path: '', redirectTo: 'login', pathMatch: 'full'},
   // not found path goes here
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

@@ -27,6 +27,7 @@ import { SearchBusinessCardsComponent } from './search-business-cards/search-bus
 import { BusinessCardComponent } from './business-card/business-card.component';
 import { BusinessCardService } from './business-card/service/business-cards.service';
 import { BusinessCardListComponent } from './business-card-list/business-card-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { BusinessCardListComponent } from './business-card-list/business-card-li
     NewBusinessCardComponent,
     SearchBusinessCardsComponent,
     BusinessCardComponent,
-    BusinessCardListComponent
+    BusinessCardListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
