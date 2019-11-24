@@ -1,15 +1,18 @@
-<p>Welcome to the Dashboard!</p>
+<nav class="navbar navbar-expand bg-primary fixed-top">
+    <h4 class="text-light">Welcome to Your Business Cards!</h4>
+    <ul class="navbar nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link text-light" [routerLink]="['./new']">Create New Card</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link text-light" [routerLink]="['./search']">Search Cards</a>
+        </li>
+    </ul>
 
-<section>
-    <a [routerLink]="['./new']">Create New Card</a>
-    <a [routerLink]="['./search']">Search Cards</a>
-</section>
+    <button (click)="logout()" class="btn btn-light">Log Out</button>
+</nav>
 
-<section>
-    <button (click)="logout()" class="btn btn-primary">Log Out</button>
-</section>
-
-<section>
+<section class="navPad">
     <router-outlet></router-outlet>
 </section>
 
