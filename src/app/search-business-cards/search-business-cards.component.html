@@ -8,64 +8,70 @@
         <!-- search display -->
         <div class="col-6">
 
-            <div >
+            <!-- form -->
+            <div class="text-center">
             <h3>Search Your Cards!</h3>
             <form #searchForm="ngForm"
                 (ngSubmit)="search(searchForm)">
-                
-                <div class="form-group">
-                    <label for="searchTerm">Search</label>
-                    <input class="form-control" type="text"
+
+                <div class="form-group row">
+                    <div class="col-1"></div>
+                    <input class="form-control col-7" type="text"
                         id="searchTerm"
                         placeholder="Enter Search Term"
                         name="searchTerm" ngModel>
+
+                    <button type="submit" class="btn btn-primary col-2">Search</button>
+                    <button type="button" class="btn btn-dark col-2" 
+                        (click)="clearCards()" *ngIf="foundCards.length > 0">Clear</button>
+                    
                 </div>
 
                 <div>
-                    <input type="radio" value="f_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
-                    <span>First Name</span>
-                    <input type="radio" value="l_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
-                    <span>Last Name</span>
-                    <input type="radio" value="email" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
-                    <span>Email</span>
-                    <input type="radio" value="phone_number" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
-                    <span>Phone Number</span>
-                    <input type="radio" value="misc_text" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
-                    <span>Other</span>
-                </div>
-
-                <div>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <input class="mr-1" type="radio" value="f_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                    <span class="mr-3">First Name</span>
+                    <input class="mr-1" type="radio" value="l_name" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                    <span class="mr-3">Last Name</span>
+                    <input class="mr-1" type="radio" value="email" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                    <span class="mr-3">Email</span>
+                    <input class="mr-1" type="radio" value="phone_number" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                    <span class="mr-3">Phone Number</span>
+                    <input class="mr-1" type="radio" value="misc_text" [(ngModel)]="searchByModel" [ngModelOptions]="{standalone: true}">
+                    <span class="mr-3">Other</span>
                 </div>
             </form>
  
-            <section *ngIf="!searchHit">
-                    <p>Sorry, we couldn't find anything matching that!</p>
-            </section>
+            <!-- results -->
+            <div class="text-center" *ngIf="!searchHit">
+                <br><br>
+                    <h3>Sorry!</h3>
+                    <h5>We couldn't find any cards matching that.</h5>
+            </div>
             <div *ngIf="searchHit">
-
-                <!-- <app-business-card *ngFor="let card of foundCards" [data]="card"></app-business-card> -->
+                <br>
+                <div *ngIf="foundCards.length > 0">
+                    <h4 class="text-center">Here's what we found...</h4>
+                </div>
                     <div class="card w-50 mx-auto" *ngFor="let card of foundCards">
-                            <img [src]="card.image" class="card-img-top">
-                            <div class="card-body">
-                                <div>
-                                    <h6 class="d-inline">Name: </h6>
-                                    <p class="d-inline">{{card.f_name }} {{ card.l_name }}</p>
-                                </div>
-                                <div>
-                                    <h6 class="d-inline">Email: </h6>
-                                    <p class="d-inline">{{card.email }}</p>
-                                </div>
-                                <div>
-                                    <h6 class="d-inline">Phone Number: </h6>
-                                    <p class="d-inline">{{card.phone_number }}</p>
-                                </div>
-                                <div>
-                                    <h6 class="d-inline">Addition Info: </h6>
-                                    <p class="d-inline">{{card.misc_text }}</p>
-                                </div>
+                        <img [src]="card.image" class="card-img-top">
+                        <div class="card-body">
+                            <div>
+                                <h6 class="d-inline">Name: </h6>
+                                <p class="d-inline">{{card.f_name }} {{ card.l_name }}</p>
                             </div>
-                        
+                            <div>
+                                <h6 class="d-inline">Email: </h6>
+                                <p class="d-inline">{{card.email }}</p>
+                            </div>
+                            <div>
+                                <h6 class="d-inline">Phone Number: </h6>
+                                <p class="d-inline">{{card.phone_number }}</p>
+                            </div>
+                            <div>
+                                <h6 class="d-inline">Addition Info: </h6>
+                                <p class="d-inline">{{card.misc_text }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -99,12 +99,12 @@ export class NewBusinessCardComponent implements OnInit {
     tokens.forEach( (element) => {
 
       if (areaCodeRegex.exec(element) != null || phoneRegex.exec(element) != null) {
-        console.log('phone num hit!');
+        //console.log('phone num hit!');
         this.formData.phone_number += element + ' ';
       }
 
       else if (emailRegex.exec(element) != null) {
-        console.log('email hit!');
+        //console.log('email hit!');
         this.formData.email += element;
       } 
 
@@ -119,11 +119,11 @@ export class NewBusinessCardComponent implements OnInit {
 
     // set up data obj
     const cardToPush: IBusinessCardTest = {
-      f_name: form.value.f_name,
-      l_name: form.value.l_name,
-      email: form.value.email,
-      phone_number: form.value.phone_number,
-      misc_text: form.value.misc_text,
+      f_name: form.value.f_name.trim(),
+      l_name: form.value.l_name.trim(),
+      email: form.value.email.trim(),
+      phone_number: form.value.phone_number.trim(),
+      misc_text: form.value.misc_text.trim(),
       image: this.webcamImage.imageAsDataUrl
     }
 

@@ -27,6 +27,11 @@ export class SearchBusinessCardsComponent implements OnInit {
     this.itemsRef = this.cardService.getItemRef();
   }
 
+  clearCards() : void {
+    // searchHit flag still true, prevents miss message from showing
+    this.foundCards = [];
+  }
+
   search(form: any) {
     console.log(this.searchByModel);
     console.log(form.value.searchTerm);
@@ -64,5 +69,6 @@ export class SearchBusinessCardsComponent implements OnInit {
     });
 
   }
+  
   
 }
