@@ -8,6 +8,7 @@
         <!-- search display -->
         <div class="col-6">
 
+            <div >
             <h3>Search Your Cards!</h3>
             <form #searchForm="ngForm"
                 (ngSubmit)="search(searchForm)">
@@ -16,7 +17,7 @@
                     <label for="searchTerm">Search</label>
                     <input class="form-control" type="text"
                         id="searchTerm"
-                        placeholder="First Name"
+                        placeholder="Enter Search Term"
                         name="searchTerm" ngModel>
                 </div>
 
@@ -37,15 +38,39 @@
                     <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </form>
-
-            <section *ngIf="!searchHit" style="display: inline-block;">
+ 
+            <section *ngIf="!searchHit">
                     <p>Sorry, we couldn't find anything matching that!</p>
-                </section>
-                <section *ngIf="searchHit" style="display: inline-block;">
-                    <app-business-card *ngFor="let card of foundCards" [data]="card"></app-business-card>
             </section>
-        </div>
+            <div *ngIf="searchHit">
 
+                <!-- <app-business-card *ngFor="let card of foundCards" [data]="card"></app-business-card> -->
+                    <div class="card w-50 mx-auto" *ngFor="let card of foundCards">
+                            <img [src]="card.image" class="card-img-top">
+                            <div class="card-body">
+                                <div>
+                                    <h6 class="d-inline">Name: </h6>
+                                    <p class="d-inline">{{card.f_name }} {{ card.l_name }}</p>
+                                </div>
+                                <div>
+                                    <h6 class="d-inline">Email: </h6>
+                                    <p class="d-inline">{{card.email }}</p>
+                                </div>
+                                <div>
+                                    <h6 class="d-inline">Phone Number: </h6>
+                                    <p class="d-inline">{{card.phone_number }}</p>
+                                </div>
+                                <div>
+                                    <h6 class="d-inline">Addition Info: </h6>
+                                    <p class="d-inline">{{card.misc_text }}</p>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 </section>
