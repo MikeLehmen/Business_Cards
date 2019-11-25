@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IBusinessCardTestID } from './model/business-card.model';
+import { IBusinessCardID } from './model/business-card.model';
 import { BusinessCardService } from './service/business-cards.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { BusinessCardService } from './service/business-cards.service';
   styleUrls: ['./business-card.component.css']
 })
 export class BusinessCardComponent implements OnInit {
-  @Input() data: IBusinessCardTestID;
+  @Input() data: IBusinessCardID;
   update: boolean;
 
   constructor(private cards: BusinessCardService) {

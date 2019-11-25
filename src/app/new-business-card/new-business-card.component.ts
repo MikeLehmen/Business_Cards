@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-
 import { Observable, Subject } from 'rxjs';
 import { WebcamImage } from '../webcam/domain/webcam-image';
 import { WebcamUtil } from '../webcam/util/webcam.util';
@@ -8,8 +7,7 @@ import { WebcamInitError } from '../webcam/domain/webcam-init-error';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-
-import { IBusinessCardTest, IBusinessCardTestID } from '../business-card/model/business-card.model';
+import { IBusinessCard, IBusinessCardID } from '../business-card/model/business-card.model';
 import { BusinessCardService } from '../business-card/service/business-cards.service';
 
 @Component({
@@ -33,7 +31,7 @@ export class NewBusinessCardComponent implements OnInit {
   private nextWebcam: Subject<boolean|string> = new Subject<boolean|string>();
 
   // ---- data model ----
-  private formData: IBusinessCardTest;
+  private formData: IBusinessCard;
 
   constructor(private afs: AngularFirestore, private http: HttpClient, private router: Router, private cards : BusinessCardService) {
     this.formData = {
@@ -72,7 +70,7 @@ export class NewBusinessCardComponent implements OnInit {
 
     console.log(request);
 
-    // have to unsub from this
+    // should be getting destroyed when it leaves scope...
     this.http.post(googleVisionURL, request).subscribe( (results: any) => {
       console.log(results);
       
@@ -118,7 +116,7 @@ export class NewBusinessCardComponent implements OnInit {
   pushData(form: any): void {
 
     // set up data obj
-    const cardToPush: IBusinessCardTest = {
+    const cardToPush: IBusinessCard = {
       f_name: form.value.f_name.trim(),
       l_name: form.value.l_name.trim(),
       email: form.value.email.trim(),

@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
-import { IBusinessCardTestID } from '../business-card/model/business-card.model';
+import { IBusinessCardID } from '../business-card/model/business-card.model';
 import { BusinessCardService } from '../business-card/service/business-cards.service';
 
 @Component({
@@ -11,11 +11,11 @@ import { BusinessCardService } from '../business-card/service/business-cards.ser
   styleUrls: ['./search-business-cards.component.css']
 })
 export class SearchBusinessCardsComponent implements OnInit {
-  private foundCards: IBusinessCardTestID[];
+  private foundCards: IBusinessCardID[];
   private searchByModel: string;
   private searchHit: boolean;
 
-  private itemsRef: Observable<IBusinessCardTestID[]>;
+  private itemsRef: Observable<IBusinessCardID[]>;
 
   constructor(private afs: AngularFirestore, private cardService: BusinessCardService) { 
     this.foundCards = [];
@@ -51,7 +51,7 @@ export class SearchBusinessCardsComponent implements OnInit {
 
           const data = doc.data();
 
-          const card : IBusinessCardTestID = {
+          const card : IBusinessCardID = {
             f_name : data.f_name,
             l_name : data.l_name,
             email : data.email,

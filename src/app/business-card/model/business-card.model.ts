@@ -1,4 +1,4 @@
-export interface IBusinessCardTest {
+export interface IBusinessCard {
     f_name: string;
     l_name: string;
     email: string;
@@ -7,6 +7,6 @@ export interface IBusinessCardTest {
     image: string;
 }
 
-export interface IBusinessCardTestID extends IBusinessCardTest {
+export interface IBusinessCardID extends IBusinessCard {
     id: string;
 }

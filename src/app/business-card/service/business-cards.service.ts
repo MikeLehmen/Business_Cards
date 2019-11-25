@@ -1,38 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { IBusinessCardTest, IBusinessCardTestID } from '../model/business-card.model';
+import { IBusinessCard, IBusinessCardID } from '../model/business-card.model';
 import { Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable()
 export class BusinessCardService {
-    private itemsCollection: AngularFirestoreCollection<IBusinessCardTest>;
-    private itemsMeta: Observable<IBusinessCardTestID[]>;
+    private itemsCollection: AngularFirestoreCollection<IBusinessCard>;
+    private itemsMeta: Observable<IBusinessCardID[]>;
 
     private authObserver: any;
 
     constructor(private afs : AngularFirestore, afAuth: AngularFireAuth) {
-        // var userID = afAuth.auth.currentUser.uid;
-        // console.log(userID);
-
-        // this.itemsCollection = this.afs.collection(userID);
-        // this.items = this.itemsCollection.valueChanges();
-
-        // this.itemsMeta = this.itemsCollection.snapshotChanges().pipe(
-        //     map( (actions) => actions.map( item  => {
-        //         const data = item.payload.doc.data() as IBusinessCardTest;
-        //         const id = item.payload.doc.id;
-        //         return { id, ...data };
-        //     }))
-        // );
 
         this.authObserver = afAuth.auth.onAuthStateChanged((user) => {
             if (user) {
                 this.itemsCollection = this.afs.collection(user.uid);
                 this.itemsMeta = this.itemsCollection.snapshotChanges().pipe(
                     map( (actions) => actions.map( item  => {
-                        const data = item.payload.doc.data() as IBusinessCardTest;
+                        const data = item.payload.doc.data() as IBusinessCard;
                         const id = item.payload.doc.id;
                         return { id, ...data };
                     }))
@@ -47,20 +34,20 @@ export class BusinessCardService {
 
     }
 
-    getItemRef(): Observable<IBusinessCardTestID[]> {
+    getItemRef(): Observable<IBusinessCardID[]> {
         return this.itemsMeta;
     }
 
-    create(card: IBusinessCardTest) : Promise<firebase.firestore.DocumentReference> {
+    create(card: IBusinessCard) : Promise<firebase.firestore.DocumentReference> {
         return this.itemsCollection.add(card);
     }
 
-    delete(card: IBusinessCardTestID) : void {
+    delete(card: IBusinessCardID) : void {
         this.itemsCollection.doc(card.id).delete();
     }
 
-    update(card: IBusinessCardTestID) : void {
-        const data : IBusinessCardTest = {
+    update(card: IBusinessCardID) : void {
+        const data : IBusinessCard = {
             f_name: card.f_name,
             l_name: card.l_name,
             email: card.email,
