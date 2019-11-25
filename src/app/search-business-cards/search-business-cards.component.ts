@@ -33,13 +33,10 @@ export class SearchBusinessCardsComponent implements OnInit {
   }
 
   search(form: any) {
-    console.log(this.searchByModel);
-    console.log(form.value.searchTerm);
 
     this.foundCards = [];
 
     var result = this.cardService.search(this.searchByModel, form.value.searchTerm);
-    console.log(result.get());
 
     result.get().then((querySnapshot) => {
       if (querySnapshot.empty) {

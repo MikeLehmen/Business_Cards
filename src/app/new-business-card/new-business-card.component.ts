@@ -68,16 +68,11 @@ export class NewBusinessCardComponent implements OnInit {
       ]
     };
 
-    console.log(request);
-
     // should be getting destroyed when it leaves scope...
     this.http.post(googleVisionURL, request).subscribe( (results: any) => {
-      console.log(results);
-      
-      const resultText = results.responses[0].textAnnotations.map(e => { return e.description; });
 
+      const resultText = results.responses[0].textAnnotations.map(e => { return e.description; });
       resultText.shift();
-      console.log(resultText);
 
       this.processResults(resultText);
 
@@ -86,7 +81,7 @@ export class NewBusinessCardComponent implements OnInit {
   }
 
   processResults(tokens: string[]) : void {
-    // assume name is first two elements for now
+    // assumes name is first two elements
     this.formData.f_name = tokens.shift();
     this.formData.l_name = tokens.shift();
 
@@ -97,12 +92,10 @@ export class NewBusinessCardComponent implements OnInit {
     tokens.forEach( (element) => {
 
       if (areaCodeRegex.exec(element) != null || phoneRegex.exec(element) != null) {
-        //console.log('phone num hit!');
         this.formData.phone_number += element + ' ';
       }
 
       else if (emailRegex.exec(element) != null) {
-        //console.log('email hit!');
         this.formData.email += element;
       } 
 

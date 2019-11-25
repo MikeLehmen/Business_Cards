@@ -11,24 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  // also try this just using a promise, might be cleaner
-  // this observable emits more than I'd like, promise would fix
-  //authObservable: Observable<any>;
 
   private user_account_error: boolean;
   private incorrect_password_error: boolean;
   private invalid_email_error: boolean;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { 
-   // this.authObservable = afAuth.user;
-    // this.authObserver = this.authObservable.subscribe(function() {
-    //                                           router.navigate(['dashboard']);
-    //                                         });
     this.user_account_error = false;
     this.incorrect_password_error = false;
     this.invalid_email_error = false;
-
-    console.log(this.user_account_error);
   }
 
   onSubmit(form: any) {
@@ -71,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.authObserver.unsubscribe();
+
   }
 
 }
