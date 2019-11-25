@@ -1,5 +1,6 @@
 <div class="d-flex h-100 align-items-center bg-primary">
   <div class="container">
+    <!-- login display -->
     <div class="row">
       <div class="col">
         <div class="jumbotron">
@@ -29,8 +30,21 @@
             </form>
 
           </div>
+
         </div>
       </div>
     </div>
+
+    <!-- error display -->
+    <div class="row w-50 mx-auto" *ngIf="user_account_error || incorrect_password_error || invalid_email_error">
+      <div class="col">
+        <div class="jumbotron bg-danger">
+            <h5 class="text-center text-light" *ngIf="user_account_error">No User Account Exists!</h5>
+            <h5 class="text-center text-light" *ngIf="incorrect_password_error">Incorrect Password!</h5>
+            <h5 class="text-center text-light" *ngIf="invalid_email_error">Invalid Email Addess!</h5>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
