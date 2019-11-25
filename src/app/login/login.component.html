@@ -1,26 +1,36 @@
-<!-- <p>login works!</p> -->
+<div class="d-flex h-100 align-items-center bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="jumbotron">
+          <h1 class="text-center">Login to Business Cards</h1>
 
-<h1 style="text-align:center">Login to Business Cards App</h1>
-  <div>
-      <form #loginForm="ngForm"
-        (ngSubmit)="onSubmit(loginForm.value)">
-    
-        <div class="form-group" style="width:20%;margin:auto">
-            <label for="userInput">Email</label>
-            <input class="form-control" type="text"
-                id="userInput"
-                placehoder="Email"
-                name="userName" ngModel>
+          <div>
+              <form #loginForm="ngForm"
+                (ngSubmit)="onSubmit(loginForm.value)">
+            
+                <div class="form-group" style="width:20%;margin:auto">
+                    <label for="userInput">Email</label>
+                    <input class="form-control" type="text"
+                        id="userInput"
+                        placehoder="Email"
+                        name="userName" ngModel>
+                </div>
+                <div class="form-group" style="width:20%;margin:auto">
+                    <label for="pwInput">Password</label>
+                    <input class="form-control" type="password"
+                        id="pwInput"
+                        placehoder="Password"
+                        name="pw" ngModel>
+                </div>
+                <div>
+                  <button type="submit" class="btn btn-primary d-block mx-auto mt-3">Login</button>
+                </div>
+            </form>
+
+          </div>
         </div>
-        <div class="form-group" style="width:20%;margin:auto">
-            <label for="pwInput">Password</label>
-            <input class="form-control" type="text"
-                id="pwInput"
-                placehoder="Password"
-                name="pw" ngModel>
-        </div>
-        <div style="width:5%;margin:auto;margin-top:10px">
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+      </div>
+    </div>
   </div>
+</div>
